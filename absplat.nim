@@ -25,20 +25,8 @@ let dt: cdouble = 0.2
 
 var c1 = Circle[void](center: Point(x: 120, y: 70), radius: 9.6, inertia: Vector(x: 0, y: 0), is_static: false)
 
-let a = Point(x: 0, y: -10)
-let b = Point(x: 0, y: 256)
-let s1 = Segment(a: a, b: b)
-
-let c = Point(x: 384, y: -10)
-let d = Point(x: 384, y: 256)
-let s2 = Segment(a: c, b: d)
-
-let e = Point(x:   0, y: -10)
-let f = Point(x: 384, y: -10)
-let s3 = Segment(a: e, b: f)
-
 var circles = @[c1]
-var segments = @[s1, s2, s3]
+var segments: seq[Segment] = @[]
 
 let tex_filename: cstring = "./Abstract_Platformer_370_assets/Vector/vector_complete.svg"
 var tex_loaded: bool = false
@@ -51,8 +39,6 @@ setImgSrc(tex, tex_filename)
 imgOnload(tex, tex_onload)
 
 proc draw_ap2(c: Circle) =
-  #let cx = cint(c.center.x)
-  #let cy = cint(c.center.y)
   let cx = c.center.x
   let cy = c.center.y
   let dx = cx - 9
@@ -91,8 +77,15 @@ for j, tm in map:
     let dy = (j div 12) * 32
     addSquare(dx, dy, 32, 32)
 
+proc bounds(circles: var seq[Circle[void]]) =
+  var c = addr circles[0]
+  c[].center.x = max(c[].center.x,   0 + 9.6)
+  c[].center.x = min(c[].center.x, 384 - 4.8)
+  c[].center.y = max(c[].center.y, -10 + 9.6)
+
 proc animate() =
   update_circles(circles, segments, gravity, dt, restitution)
+  bounds(circles)
   circles[0].inertia.x *= 0.99
   draw_bg()
   if tex_loaded:
