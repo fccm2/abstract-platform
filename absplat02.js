@@ -276,7 +276,6 @@ function chckIndx(i_33557184, a_33557185, b_33557186) {
   raiseIndexError(i_33557184, a_33557185, b_33557186);
   }
  } while (false);
-
  return result_33557187;
 }
 
@@ -324,7 +323,6 @@ function isFatPointer_33557131(ti_33557132) {
  } while (false);
 
  return result_33557133;
-
 }
 
 function nimCopyAux(dest_33557144, src_33557145, n_33557146) {
@@ -350,7 +348,7 @@ function nimCopyAux(dest_33557144, src_33557145, n_33557146) {
 var gravity_469762063 = {x: 0.0, y: 1.8};
 var restitution_469762064 = 0.6;
 var dt_469762065 = 0.2;
-var c1_469762072 = [{center: {x: 120.0, y: 95.0}, radius: 9.8, inertia: {x: 0.0, y: 0.0}, is_static: false}];
+var c1_469762072 = [{center: {x: 101.0, y: 95.0}, radius: 9.8, inertia: {x: 0.0, y: 0.0}, is_static: false}];
 var circles_469762077 = [[nimCopy(null, c1_469762072[0], NTI469762071)]];
 var segments_469762082 = [[]];
 var tex_filename_469762083 = "./Abstract_Platformer_370_assets/Vector/vector_complete.svg";
@@ -531,7 +529,7 @@ function raiseAssert_218103840(msg_218103841) {
 function failedAssertImpl_218103864(msg_218103865) {
   raiseAssert_218103840(msg_218103865);
 }
-var map_469762193 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 194, 196, 0, 0, 0, 203, 0, 0, 0, 0, 194, 202, 0, 0, 0, 0, 194, 195, 195, 196, 0, 0, 0, 193, 195, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 194, 195, 195, 0, 0, 0, 194, 195, 196, 0, 0, 0, 0, 0, 0, 0, 196, 0, 0, 0, 0, 0, 0, 234, 0, 0, 0, 0, 0, 231, 195, 195, 195, 195, 195, 195, 195, 196, 0, 0, 235, 194, 193, 225, 257, 193, 225, 193, 193, 193, 231, 195, 195, 195, 195];
+var map_469762193 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 204, 202, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 194, 195, 196, 0, 0, 0, 203, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 194, 195, 195, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 194, 195, 196, 0, 234, 0, 0, 0, 0, 0, 0, 0, 0, 0, 195, 195, 195, 195, 195, 195, 196, 0, 0, 202, 0, 194, 225, 193, 257, 193, 193, 231, 195, 195, 195, 195, 195, 195];
 var coll_469762198 = [193, 194, 195, 196];
 Label2: do {
  var j_469762231 = [0];
@@ -544,8 +542,8 @@ Label2: do {
     j_469762231[0] = i_469762310;
     tm_469762232[0] = map_469762193[chckIndx(i_469762310, 0, (map_469762193).length - 1)];
     if (contains_469762233(coll_469762198, tm_469762232[0])) {
-    var dx_469762270 = mulInt(modInt(j_469762231[0], 13), 32);
-    var dy_469762271 = mulInt(divInt(j_469762231[0], 13), 32);
+    var dx_469762270 = mulInt(modInt(j_469762231[0], 12), 32);
+    var dy_469762271 = mulInt(divInt(j_469762231[0], 12), 32);
     addSquare_469762184(dx_469762270, dy_469762271, 32, 32);
     }
     
@@ -678,6 +676,7 @@ function collision_circle_segment_469762408(circle_469762410, segment_469762411,
   circle_469762410.inertia.x = (vx_469762416 - (((1.0 + restitution_469762412) * dot_product_469762436) * normal_x_469762434));
   circle_469762410.inertia.y = (vy_469762417 - (((1.0 + restitution_469762412) * dot_product_469762436) * normal_y_469762435));
   }
+  
   var penetration_depth_469762437 = (r_469762415 - distance_469762433);
   if (!(circle_469762410.is_static)) {
   circle_469762410.center.x = (cx_469762413 + (normal_x_469762434 * penetration_depth_469762437));
@@ -699,6 +698,7 @@ function normalize_vector_603979799(v_603979800) {
   else {
   Temporary1 = {x: (v_603979800.x / magnitude_603979802), y: (v_603979800.y / magnitude_603979802)};
   }
+  
   result_603979801 = nimCopy(result_603979801, Temporary1, NTI603979780);
 
  return result_603979801;
@@ -720,15 +720,18 @@ function collision_circle_circle_469762454(circle1_469762456, circle2_469762457,
   HEX2DHEX3D_469762468(circle1_469762456.inertia, "x", (impulse_469762467 * normal_469762463.x));
   HEX2DHEX3D_469762468(circle1_469762456.inertia, "y", (impulse_469762467 * normal_469762463.y));
   }
+  
   if (!(circle2_469762457.is_static)) {
   HEX2BHEX3D_469762365(circle2_469762457.inertia, "x", (impulse_469762467 * normal_469762463.x));
   HEX2BHEX3D_469762365(circle2_469762457.inertia, "y", (impulse_469762467 * normal_469762463.y));
   }
+  
   var separation_469762484 = (overlap_469762462 / 2.0);
   if (!(circle1_469762456.is_static)) {
   HEX2DHEX3D_469762468(circle1_469762456.center, "x", (normal_469762463.x * separation_469762484));
   HEX2DHEX3D_469762468(circle1_469762456.center, "y", (normal_469762463.y * separation_469762484));
   }
+  
   if (!(circle2_469762457.is_static)) {
   HEX2BHEX3D_469762365(circle2_469762457.center, "x", (normal_469762463.x * separation_469762484));
   HEX2BHEX3D_469762365(circle2_469762457.center, "y", (normal_469762463.y * separation_469762484));
@@ -806,7 +809,7 @@ function update_circles_469762339(circles_469762341, circles_469762341_Idx, segm
 function bounds_469762325(circles_469762327, circles_469762327_Idx) {
   var c_469762328 = circles_469762327[circles_469762327_Idx][chckIndx(0, 0, (circles_469762327[circles_469762327_Idx]).length - 1)];
   c_469762328.center.x = max_33556202(c_469762328.center.x, 7.800000000000001);
-  c_469762328.center.x = min_33556194(c_469762328.center.x, 411.2);
+  c_469762328.center.x = min_33556194(c_469762328.center.x, 379.2);
   c_469762328.center.y = max_33556202(c_469762328.center.y, 3.8000000000000007);
 }
 
@@ -817,7 +820,7 @@ function HEX2AHEX3D_469762510(x_469762512, x_469762512_Idx, y_469762513) {
 function draw_bg_469762053() {
   ctx_469762052.beginPath();
   ctx_469762052.fillStyle = "#444";
-  ctx_469762052.rect(0, 0, 416, 288);
+  ctx_469762052.rect(0, 0, 384, 256);
   ctx_469762052.fill();
 }
 
@@ -849,8 +852,8 @@ function animate_469762338() {
       var i_469762521 = subInt(tm_469762520, 1);
       var sx_469762522 = mulInt(modInt(i_469762521, 32), 74);
       var sy_469762523 = mulInt(divInt(i_469762521, 32), 74);
-      var dx_469762524 = mulInt(modInt(j_469762519, 13), 32);
-      var dy_469762525 = mulInt(divInt(j_469762519, 13), 32);
+      var dx_469762524 = mulInt(modInt(j_469762519, 12), 32);
+      var dy_469762525 = mulInt(divInt(j_469762519, 12), 32);
       ctx_469762052.drawImage(tex_469762131, sx_469762522, sy_469762523, 64, 64, dx_469762524, dy_469762525, 32, 32);
       }
       i_469762606 = addInt(i_469762606, 1);
