@@ -8,7 +8,7 @@ let ctx = cnv.getContext2d()
 proc draw_bg*() =
   ctx.beginPath()
   ctx.fillStyle("#444")
-  ctx.rect(0, 0, 416, 288)
+  ctx.rect(0, 0, 384, 256)
   ctx.fill()
 
 proc draw_ap*(c: Circle) =
@@ -24,7 +24,7 @@ let gravity = Vector(x: 0, y: 1.8)
 let restitution: cdouble = 0.6  # Coefficient of restitution (0.6 means 40% energy loss)
 let dt: cdouble = 0.2
 
-var c1 = Circle[void](center: Point(x: 120, y: 95), radius: 9.8, inertia: Vector(x: 0, y: 0), is_static: false)
+var c1 = Circle[void](center: Point(x: 101, y: 95), radius: 9.8, inertia: Vector(x: 0, y: 0), is_static: false)
 
 var circles = @[c1]
 var segments: seq[Segment] = @[]
@@ -59,29 +59,28 @@ proc addSquare(dx, dy, dw, dh: int) =
   addSegment(dx + dw, dy, dx + dw, dy + dh)
 
 let map = @[
-  0,0,0,0,0,0,0,0,0,0,0,0,204,
-  0,0,194,196,0,0,0,203,0,0,0,0,194,
-  202,0,0,0,0,194,195,195,196,0,0,0,193,
-  195,196,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,194,195,195,
-  0,0,0,194,195,196,0,0,0,0,0,0,0,
-  196,0,0,0,0,0,0,234,0,0,0,0,0,
-  231,195,195,195,195,195,195,195,196,0,0,235,194,
-  193,225,257,193,225,193,193,193,231,195,195,195,195
+  0,0,0,0,0,0,0,0,0,0,0,204,
+  202,0,0,0,0,0,0,0,0,0,0,194,
+  195,196,0,0,0,203,0,0,0,0,0,0,
+  0,0,0,0,194,195,195,196,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,194,195,
+  196,0,234,0,0,0,0,0,0,0,0,0,
+  195,195,195,195,195,195,196,0,0,202,0,194,
+  225,193,257,193,193,231,195,195,195,195,195,195
 ]
 
 let coll = @[193,194,195,196]  # collidables
 
 for j, tm in map:
   if tm in coll:
-    let dx = (j mod 13) * 32
-    let dy = (j div 13) * 32
+    let dx = (j mod 12) * 32
+    let dy = (j div 12) * 32
     addSquare(dx, dy, 32, 32)
 
 proc bounds(circles: var seq[Circle[void]]) =
   var c = addr circles[0]
   c[].center.x = max(c[].center.x,  -2 + 9.8)
-  c[].center.x = min(c[].center.x, 416 - 4.8)
+  c[].center.x = min(c[].center.x, 384 - 4.8)
   c[].center.y = max(c[].center.y, -6 + 9.8)
 
 proc animate() =
@@ -95,8 +94,8 @@ proc animate() =
         let i = (tm - 1)
         let sx = (i mod 32) * 74
         let sy = (i div 32) * 74
-        let dx = (j mod 13) * 32
-        let dy = (j div 13) * 32
+        let dx = (j mod 12) * 32
+        let dy = (j div 12) * 32
         ctx.drawImage8(tex, sx, sy, 64, 64, dx, dy, 32, 32)
     for c in circles:
       draw_ap2(c)
