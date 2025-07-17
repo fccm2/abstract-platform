@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="12" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="12" height="8" tilewidth="64" tileheight="64" infinite="0" nextlayerid="2" nextobjectid="1">
  <tileset firstgid="1" source="absplat.tsx"/>
- <layer id="1" name="Tile Layer 1" width="12" height="9">
+ <layer id="1" name="Tile Layer 1" width="12" height="8">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,204,
-0,0,194,196,0,0,0,203,0,0,0,194,
-202,0,0,0,0,194,195,195,196,0,0,193,
-195,196,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,194,195,195,
-0,0,0,194,195,196,0,0,0,0,0,0,
-196,0,0,0,0,0,0,234,0,0,0,0,
-231,195,195,195,195,195,195,195,196,0,235,194,
-193,225,257,193,193,193,193,231,195,195,195,195
+202,0,0,0,0,0,0,0,0,0,0,194,
+195,196,0,0,0,203,0,0,0,0,0,0,
+0,0,0,0,194,195,195,196,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,194,195,
+196,0,234,0,0,0,0,0,0,0,0,0,
+195,195,195,195,195,195,196,0,0,202,0,194,
+225,193,257,193,193,231,195,195,195,195,195,195
 </data>
  </layer>
 </map>
